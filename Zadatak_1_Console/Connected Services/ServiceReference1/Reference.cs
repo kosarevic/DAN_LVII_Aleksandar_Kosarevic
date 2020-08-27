@@ -15,18 +15,21 @@ namespace Zadatak_1_Console.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/Zadatak_1_Service")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://schemas.datacontract.org/2004/07/Zadatak_1_Service.Model")]
     [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Article : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
+        private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
+        private int PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -39,27 +42,40 @@ namespace Zadatak_1_Console.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
+        public string Name {
             get {
-                return this.BoolValueField;
+                return this.NameField;
             }
             set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
+        public int Price {
             get {
-                return this.StringValueField;
+                return this.PriceField;
             }
             set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
                 }
             }
         }
@@ -79,16 +95,16 @@ namespace Zadatak_1_Console.ServiceReference1 {
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        string GetData(int value);
+        Zadatak_1_Console.ServiceReference1.Article[] GetData();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
+        System.Threading.Tasks.Task<Zadatak_1_Console.ServiceReference1.Article[]> GetDataAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        Zadatak_1_Console.ServiceReference1.CompositeType GetDataUsingDataContract(Zadatak_1_Console.ServiceReference1.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/BuyArticles", ReplyAction="http://tempuri.org/IService1/BuyArticlesResponse")]
+        void BuyArticles(Zadatak_1_Console.ServiceReference1.Article[] AllArticles, Zadatak_1_Console.ServiceReference1.Article article, int Quantity);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<Zadatak_1_Console.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(Zadatak_1_Console.ServiceReference1.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/BuyArticles", ReplyAction="http://tempuri.org/IService1/BuyArticlesResponse")]
+        System.Threading.Tasks.Task BuyArticlesAsync(Zadatak_1_Console.ServiceReference1.Article[] AllArticles, Zadatak_1_Console.ServiceReference1.Article article, int Quantity);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -118,20 +134,20 @@ namespace Zadatak_1_Console.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
+        public Zadatak_1_Console.ServiceReference1.Article[] GetData() {
+            return base.Channel.GetData();
         }
         
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
+        public System.Threading.Tasks.Task<Zadatak_1_Console.ServiceReference1.Article[]> GetDataAsync() {
+            return base.Channel.GetDataAsync();
         }
         
-        public Zadatak_1_Console.ServiceReference1.CompositeType GetDataUsingDataContract(Zadatak_1_Console.ServiceReference1.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
+        public void BuyArticles(Zadatak_1_Console.ServiceReference1.Article[] AllArticles, Zadatak_1_Console.ServiceReference1.Article article, int Quantity) {
+            base.Channel.BuyArticles(AllArticles, article, Quantity);
         }
         
-        public System.Threading.Tasks.Task<Zadatak_1_Console.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(Zadatak_1_Console.ServiceReference1.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
+        public System.Threading.Tasks.Task BuyArticlesAsync(Zadatak_1_Console.ServiceReference1.Article[] AllArticles, Zadatak_1_Console.ServiceReference1.Article article, int Quantity) {
+            return base.Channel.BuyArticlesAsync(AllArticles, article, Quantity);
         }
     }
 }

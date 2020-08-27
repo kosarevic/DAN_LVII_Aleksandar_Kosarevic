@@ -61,10 +61,10 @@
     <None Include="Connected Services\ServiceReference1\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\Zadatak_1_Console.ServiceReference1.CompositeType.datasource">
+    <None Include="Connected Services\ServiceReference1\Zadatak_1_Console.ServiceReference1.Article.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceReference1\Zadatak_1_Service.xsd">
+    <None Include="Connected Services\ServiceReference1\Zadatak_1_Service.Model.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
