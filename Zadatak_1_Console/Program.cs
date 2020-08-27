@@ -62,7 +62,7 @@ namespace Zadatak_1_Console
                             if (!success)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Incorrect input, please select article number from the list.");
+                                Console.WriteLine("Incorrect input, please try again.");
                                 continue;
                             }
                             else if (ChosenArticle < 1 || ChosenArticle > AllArticles.Count)
@@ -95,6 +95,12 @@ namespace Zadatak_1_Console
                                 Console.WriteLine("Incorrect quantity, please chose within avalaible article quantity range.");
                                 continue;
                             }
+                            else if (Quantity == 0)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect quantity, it must be at least 1.");
+                                continue;
+                            }
 
                             break;
                         }
@@ -108,9 +114,145 @@ namespace Zadatak_1_Console
                         break;
 
                     case "3":
+                        AllArticles = new List<Article>(proxy.GetData());
+                        order = 0;
+                        input = "";
 
+                        Console.WriteLine();
+                        foreach (Article a in AllArticles)
+                        {
+                            Console.WriteLine(++order + ". Article name: " + a.Name + ", Quantity: " + a.Quantity + ", Price: " + a.Price);
+                        }
+                        ChosenArticle = 0;
+                        while (true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Select Article to change its price. (Input number from the list or ~ to cancel)");
+                            input = Console.ReadLine();
+                            if (input == "~") break;
+                            bool success = int.TryParse(input, out ChosenArticle);
+                            if (!success)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect input, please try again.");
+                                continue;
+                            }
+                            else if (ChosenArticle < 1 || ChosenArticle > AllArticles.Count)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect input, please select article number from the list.");
+                                continue;
+                            }
+                            break;
+                        }
+                        if (input == "~") { Console.WriteLine(); continue; }
+
+                        int Price = 0;
+                        while (true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Select new price of article. (or ~ to cancel)");
+                            input = Console.ReadLine();
+                            if (input == "~") break;
+
+                            bool success = int.TryParse(input, out Price);
+                            if (!success)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect price, please try again.");
+                                continue;
+                            }
+                            else if (Price < 1)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect price, price can not have 0 or negative value.");
+                                continue;
+                            }
+
+                            break;
+                        }
+                        if (input == "~") { Console.WriteLine(); continue; }
+
+                        AllArticles[ChosenArticle - 1].Price = Price;
+                        proxy.WriteToFile(AllArticles.ToArray());
+
+                        Console.WriteLine();
+                        Console.WriteLine("You successfully changed article price.\n");
                         break;
                     case "4":
+                        AllArticles = new List<Article>(proxy.GetData());
+                        Article NewArticle = new Article();
+
+                        while (true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Input new article name. (or ~ to cancel)");
+                            NewArticle.Name = Console.ReadLine();
+                            if (NewArticle.Name == "~") break;
+
+                            if (NewArticle.Name == "" || NewArticle.Name == null)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Article name must contain at least one character.");
+                                continue;
+                            }
+                            break;
+                        }
+                        if (NewArticle.Name == "~") { Console.WriteLine(); continue; }
+
+                        while (true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Input new article quantity. (or ~ to cancel)");
+                            input = Console.ReadLine();
+                            if (input == "~") break;
+                            bool success1 = int.TryParse(input, out int ArticleQuantity);
+                            if (!success1)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect article quantity, please try again.");
+                                continue;
+                            }
+                            else if (ArticleQuantity < 1)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect article quantity, it must be at least 1.");
+                                continue;
+                            }
+                            NewArticle.Quantity = ArticleQuantity;
+                            break;
+                        }
+                        if (input == "~") { Console.WriteLine(); continue; }
+
+                        while (true)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Input new article price. (or ~ to cancel)");
+                            input = Console.ReadLine();
+                            if (input == "~") break;
+                            bool success1 = int.TryParse(input, out int ArticlePrice);
+                            if (!success1)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect article price, please try again.");
+                                continue;
+                            }
+                            else if (ArticlePrice < 1)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Incorrect article price, it must be at least 1.");
+                                continue;
+                            }
+                            NewArticle.Price = ArticlePrice;
+                            break;
+                        }
+                        if (input == "~") { Console.WriteLine(); continue; }
+
+                        AllArticles.Add(NewArticle);
+                        proxy.WriteToFile(AllArticles.ToArray());
+
+                        Console.WriteLine();
+                        Console.WriteLine("You successfully created new article.\n");
 
                         break;
 

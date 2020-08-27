@@ -77,7 +77,6 @@ namespace Zadatak_1_Service
             string appendText = string.Format("{0}, {1} - {2} * {3}, {4}", DateTime.Now.ToShortTimeString(), article.Name, Quantity, article.Price, Quantity * article.Price);
 
             File.WriteAllText(path, appendText);
-
         }
     }
 }

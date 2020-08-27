@@ -105,6 +105,12 @@ namespace Zadatak_1_Console.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/BuyArticles", ReplyAction="http://tempuri.org/IService1/BuyArticlesResponse")]
         System.Threading.Tasks.Task BuyArticlesAsync(Zadatak_1_Console.ServiceReference1.Article[] AllArticles, Zadatak_1_Console.ServiceReference1.Article article, int Quantity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/WriteToFile", ReplyAction="http://tempuri.org/IService1/WriteToFileResponse")]
+        void WriteToFile(Zadatak_1_Console.ServiceReference1.Article[] AllArticles);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/WriteToFile", ReplyAction="http://tempuri.org/IService1/WriteToFileResponse")]
+        System.Threading.Tasks.Task WriteToFileAsync(Zadatak_1_Console.ServiceReference1.Article[] AllArticles);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -148,6 +154,14 @@ namespace Zadatak_1_Console.ServiceReference1 {
         
         public System.Threading.Tasks.Task BuyArticlesAsync(Zadatak_1_Console.ServiceReference1.Article[] AllArticles, Zadatak_1_Console.ServiceReference1.Article article, int Quantity) {
             return base.Channel.BuyArticlesAsync(AllArticles, article, Quantity);
+        }
+        
+        public void WriteToFile(Zadatak_1_Console.ServiceReference1.Article[] AllArticles) {
+            base.Channel.WriteToFile(AllArticles);
+        }
+        
+        public System.Threading.Tasks.Task WriteToFileAsync(Zadatak_1_Console.ServiceReference1.Article[] AllArticles) {
+            return base.Channel.WriteToFileAsync(AllArticles);
         }
     }
 }

@@ -16,5 +16,8 @@ namespace Zadatak_1_Service
 
         [OperationContract]
         void BuyArticles(List<Article>AllArticles, Article article, int Quantity);
+
+        [OperationContract]
+        void WriteToFile(List<Article> AllArticles);
     }
 }
