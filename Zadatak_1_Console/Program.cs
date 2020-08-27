@@ -11,6 +11,7 @@ namespace Zadatak_1_Console
     {
         static void Main(string[] args)
         {
+            //Connection to the WCF service.
             Service1Client proxy = new Service1Client();
             string option = "";
 
@@ -29,6 +30,7 @@ namespace Zadatak_1_Console
 
                 switch (option)
                 {
+                    //Case 1 shows all available articles.
                     case "1":
                         List<Article> AllArticles = new List<Article>(proxy.GetData());
                         int order = 0;
@@ -40,17 +42,18 @@ namespace Zadatak_1_Console
                         }
                         Console.WriteLine();
                         break;
-
+                    //Case 2 implemets add new article logic.
                     case "2":
                         AllArticles = new List<Article>(proxy.GetData());
                         order = 0;
                         string input = "";
-
+                        //All articles are shown to the user.
                         Console.WriteLine();
                         foreach (Article a in AllArticles)
                         {
                             Console.WriteLine(++order + ". Article name: " + a.Name + ", Quantity: " + a.Quantity + ", Price: " + a.Price);
                         }
+                        //User selects the article from the list.
                         int ChosenArticle = 0;
                         while (true)
                         {
@@ -74,6 +77,7 @@ namespace Zadatak_1_Console
                             break;
                         }
                         if (input == "~") { Console.WriteLine(); continue; }
+                        //User selects the quantity of articles he/she wishes to buy.
                         int Quantity = 0;
                         while (true)
                         {
@@ -95,7 +99,7 @@ namespace Zadatak_1_Console
                                 Console.WriteLine("Incorrect quantity, please chose within avalaible article quantity range.");
                                 continue;
                             }
-                            else if (Quantity == 0)
+                            else if (Quantity < 1)
                             {
                                 Console.WriteLine();
                                 Console.WriteLine("Incorrect quantity, it must be at least 1.");
@@ -112,18 +116,19 @@ namespace Zadatak_1_Console
                         Console.WriteLine();
                         Console.WriteLine("You successfully bought article.\n");
                         break;
-
+                    //Case 3 implemets edit articles price logic.
                     case "3":
                         AllArticles = new List<Article>(proxy.GetData());
                         order = 0;
                         input = "";
-
+                        //All articles are shown to the user.
                         Console.WriteLine();
                         foreach (Article a in AllArticles)
                         {
                             Console.WriteLine(++order + ". Article name: " + a.Name + ", Quantity: " + a.Quantity + ", Price: " + a.Price);
                         }
                         ChosenArticle = 0;
+                        //User choses article from the list.
                         while (true)
                         {
                             Console.WriteLine();
@@ -146,7 +151,7 @@ namespace Zadatak_1_Console
                             break;
                         }
                         if (input == "~") { Console.WriteLine(); continue; }
-
+                        //User sets a new price for the article.
                         int Price = 0;
                         while (true)
                         {
@@ -179,10 +184,11 @@ namespace Zadatak_1_Console
                         Console.WriteLine();
                         Console.WriteLine("You successfully changed article price.\n");
                         break;
+                    //Case 4 implemets add new article logic.
                     case "4":
                         AllArticles = new List<Article>(proxy.GetData());
                         Article NewArticle = new Article();
-
+                        //User is required to input new article name.
                         while (true)
                         {
                             Console.WriteLine();
@@ -199,7 +205,7 @@ namespace Zadatak_1_Console
                             break;
                         }
                         if (NewArticle.Name == "~") { Console.WriteLine(); continue; }
-
+                        //User is requiered to input new article quantity.
                         while (true)
                         {
                             Console.WriteLine();
@@ -223,7 +229,7 @@ namespace Zadatak_1_Console
                             break;
                         }
                         if (input == "~") { Console.WriteLine(); continue; }
-
+                        //User is requiered to input new article price.
                         while (true)
                         {
                             Console.WriteLine();
